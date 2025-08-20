@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>主持人稿展示</title>
+<title>2025 MGS 創新未來南方 主題館</title>
 <style>
   :root{
     --primary:#004aad; --day1:#28a745; --day2:#ff9800; --muted:#6c757d;
@@ -11,37 +11,40 @@
     --intro:#e3f2fd; --blue-text:#0d47a1; --map:#e8f5e9; --green-text:#1b5e20;
     --bg:#ffffff; --shadow:0 6px 20px rgba(0,0,0,.08);
   }
-  /* Base */
   html,body{height:100%;}
   body{font-family: Microsoft JhengHei, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height:1.6; margin:0; color:#222; background:var(--bg);
        padding-top:calc(env(safe-area-inset-top,0px)); padding-bottom:calc(env(safe-area-inset-bottom,0px));}
   .container{max-width:1100px; margin:0 auto; padding:20px;}
   h1{color:var(--primary); text-align:center; margin:8px 0 16px; font-weight:800; letter-spacing:.5px;}
 
-  /* Sticky top nav */
   .nav{position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:0 0 16px; padding:10px; background:rgba(255,255,255,.9); backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--border);} 
   .btn{appearance:none; border:0; border-radius:12px; padding:10px 18px; color:#fff; font-weight:700; cursor:pointer; box-shadow:var(--shadow);}  
   .btn:focus-visible{outline:2px solid #222; outline-offset:2px;}
-  .btn-primary{background:var(--primary);} .btn-day1{background:var(--day1);} .btn-day2{background:var(--day2);} 
+  .btn-primary{background:var(--primary);} .btn-day1{background:var(--day1);} .btn-day2{background:var(--day2);} .btn-contact{background:var(--muted);} 
 
   .section{display:none;}
   .section.active{display:block;}
   .card{margin:16px 0;}
   .card h2{color:var(--primary); text-align:center; margin:14px 0;}
 
-  /* Responsive table wrapper */
   .table-wrap{box-shadow:var(--shadow); border-radius:12px; overflow:hidden; background:#fff;}
   .table-scroll{overflow:auto; -webkit-overflow-scrolling:touch;}
   table{width:100%; border-collapse:collapse; font-size:16px; background:#fff; table-layout:fixed;}
   thead tr{background:var(--head);} 
-  th,td{border:1px solid var(--border); padding:10px;}
+  th,td{border:1px solid var(--border); padding:12px;}
   th{text-align:center;}
-  td:first-child{width:80px; white-space:nowrap; text-align:center;}
+  td:first-child{text-align:center;}
+
+  /* 巡禮流程欄位字置中 */
+  #morning table th:first-child, #morning table td:first-child {text-align:center;}
+
+  /* Day1/Day2：時間欄放寬與置中 */
+  #day1 table th:first-child, #day1 table td:first-child,
+  #day2 table th:first-child, #day2 table td:first-child{width:120px; white-space:nowrap; text-align:center; font-weight:600;}
+  /* 公司欄不換行 + 省略 */
+  #day1 table th:nth-child(2), #day1 table td:nth-child(2),
+  #day2 table th:nth-child(2), #day2 table td:nth-child(2){white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   td:last-child{text-align:center; white-space:nowrap;}
-  #day1 table td:nth-child(2),
-  #day1 table th:nth-child(2),
-  #day2 table td:nth-child(2),
-  #day2 table th:nth-child(2){white-space:nowrap;}
   .pill{display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; margin-left:8px;}
   .pill.day1{background:#e8f5e9; color:#256029;} .pill.day2{background:#fff3e0; color:#8f4f00;}
   .highlight{background:var(--warn); color:var(--warn-text); font-weight:700;}
@@ -49,58 +52,60 @@
   .map{background:var(--map); color:var(--green-text); font-weight:600;}
   .divider{height:1px; background:var(--border); margin:22px 0;}
 
-  /* --- Widescreen 16:9 (desktop / projector) --- */
   @media (min-width:1200px) and (min-aspect-ratio:16/9){
     .container{max-width:1400px; padding:28px 24px;}
     h1{font-size:40px; margin:10px 0 22px;}
     .btn{padding:12px 20px; font-size:18px;}
-    table{font-size:18px;}
-    th,td{padding:14px 12px;}
-    td:first-child{width:100px;}
+    table{font-size:19px;}
+    th,td{padding:16px 14px;}
+    #day1 table th:first-child, #day1 table td:first-child,
+    #day2 table th:first-child, #day2 table td:first-child{width:140px; font-size:18px;}
   }
-
-  /* --- iPhone Pro (窄螢幕，含安全區) --- */
   @media (max-width:430px){
     .container{padding:10px 12px 16px;}
     h1{font-size:20px; margin:6px 0 12px;}
     .nav{gap:8px; padding:8px;}
-    .btn{flex:1 1 calc(33% - 8px); min-width:0; padding:10px 8px; font-size:13px; border-radius:10px;}
+    .btn{flex:1 1 calc(50% - 8px); min-width:0; padding:10px 8px; font-size:13px; border-radius:10px;}
     .card{margin:12px 0;}
     .card h2{font-size:16px; margin:10px 0;}
-    /* 讓表格可左右滑動，並避免字擠爆 */
     .table-scroll{max-width:100%; overflow-x:auto;}
-    table{font-size:13.5px; min-width:720px;}
-    th,td{padding:8px 8px;}
-    td:first-child{width:72px;}
+    table{font-size:14px; min-width:950px;}
+    th,td{padding:10px 8px;}
+    /* 時間欄黏左 */
+    #day1 table th:first-child, #day1 table td:first-child,
+    #day2 table th:first-child, #day2 table td:first-child{position:sticky; left:0; background:#fff; z-index:2; font-size:14px; min-width:110px;}
   }
 </style>
 </head>
 <body>
   <div class="container">
-    <h1>主持人稿展示</h1>
+    <h1>2025 MGS 創新未來南方 主題館</h1>
 
     <div class="nav" id="nav">
-      <button class="btn btn-primary" data-target="morning">上午專區</button>
+      <button class="btn btn-primary" data-target="morning">巡禮+分享</button>
       <button class="btn btn-day1" data-target="day1">Day 1 Pitch</button>
       <button class="btn btn-day2" data-target="day2">Day 2 Pitch</button>
+      <button class="btn btn-contact" data-target="contact">聯絡資訊</button>
     </div>
 
+    <!-- 巡禮＋分享（上午專區） -->
     <section id="morning" class="section active">
       <div class="card">
-        <h2>11:25–11:30｜經濟部中企署 亞灣創新未來南方 主題專區</h2>
+        <h2>11:25–11:30｜長官巡禮流程</h2>
         <div class="table-wrap"><div class="table-scroll">
         <table>
           <thead>
             <tr><th>流程</th><th>內容</th><th>預估時間</th></tr>
           </thead>
           <tbody>
-            <tr><td>長官進場引導</td><td>歡迎XXX 署長、XXX 市長蒞臨創新未來南方主題館，請新創企業掌聲歡迎<br/>(請接續展區引言、產業藍圖)</td><td>30 秒</td></tr>
-            <tr class="intro"><td>展區引言</td><td>亞灣新創園是南部推動創新的重要基地，聚焦在地服務、鏈結產業、拓展國際三個方向。</td><td>15 秒</td></tr>
-            <tr class="map"><td>產業藍圖</td><td>這次精選 12 家新創企業，涵蓋 AI 應用、智慧醫療、永續綠能三大核心領域，展現未來產業的關鍵方向。</td><td>15 秒</td></tr>
-            <tr class="highlight"><td>合影</td><td>在此邀請長官、貴賓以及所有新創企業一同上台合影，留下珍貴紀念。</td><td>40 秒</td></tr>
-            <tr><td>署長致詞引導</td><td>中企署不只是提供資源，更要協助新創從研發、進入市場、走向國際，讓創新真正落地並接軌世界。 現在，我們特別邀請署長上台，為大家致詞。</td><td>1 分鐘</td></tr>
-            <tr><td>茂登碳中和</td><td>謝謝署長致詞，接下來邀請「茂登碳中和」，進行公司簡介與分享，請長官移駕至茂登碳中和展區進行聆聽。</td><td>1 分鐘</td></tr>
-            <tr><td>安美洛生醫</td><td>接下來邀請「安美洛生醫」，進行公司簡介與分享，請長官移駕至茂登碳中和展區進行聆聽。</td><td>1 分鐘</td></tr>
+            <tr><td>長官進場引導</td><td>歡迎經濟部中小及新創企業署李冠志 署長以及我們高雄的大家長-陳其邁市長蒞臨創新未來南方主題館，請新創企業掌聲歡迎。<br/>(引導至電視牆前方合影)<br/>(請接續展區引言、產業藍圖)</td><td>30 秒</td></tr>
+            <tr class="intro"><td>展區引言</td><td>各位長官、貴賓目前來到的是由亞灣新創園打造的創新未來南方主題館。亞灣新創園為南部推動創新的重要基地，聚焦在地服務、鏈結產業、拓展國際三大方向。</td><td>15 秒</td></tr>
+            <tr class="map"><td>產業藍圖</td><td>今年度特別精選 12 家新創企業，其範圍涵蓋 AI 應用、智慧醫療、永續綠能三大核心領域，展現未來產業的關鍵方向。</td><td>15 秒</td></tr>
+            <tr class="highlight"><td>合影</td><td>在此邀請長官、貴賓以及所有新創企業一同上台合影，留下珍貴紀念。(工作人員遞手舉牌)</td><td>40 秒</td></tr>
+            <tr><td>署長致詞引導</td><td>經濟部中小及新創企業署攜手高雄市政府打造南臺灣最大國際新創基地-「亞灣新創園」，不只是提供資源，更要協助新創從研發、進入市場、走向國際，讓創新真正落地並接軌世界。 現在，讓我們一起用掌聲歡迎署長致詞。<br/>(工作人員遞麥克風)</td><td>1 分鐘</td></tr>
+            <tr><td>茂登碳中和</td><td>再次掌聲感謝署長，今天也特別邀請了兩家亮點新創廠商進行分享。邀請各位長官、貴賓一起移駕至展區聆聽。請「茂登碳中和」進行分享</td><td>1 分鐘</td></tr>
+            <tr><td>安美洛生醫</td><td>感謝茂登碳中和企業代表的分享，第二家廠商要分享的廠商是「安美洛生醫」，邀請長官移駕至展區聆聽。請「茂登碳中和」進行分享</td><td>1 分鐘</td></tr>
+            <tr><td>結語</td><td>感謝安美洛生醫企業代表的分享，也再次感謝各位長官、貴賓蒞臨亞灣新創園-創新未來南方主題館。</td><td>20秒</td></tr>
           </tbody>
         </table>
         </div></div>
@@ -126,6 +131,7 @@
       </div>
     </section>
 
+    <!-- Day 1 -->
     <section id="day1" class="section">
       <div class="card">
         <h2>新創企業 Pitch 流程｜Day 1 (8/22 週五 14:15–16:05) <span class="pill day1">10 家</span></h2>
@@ -143,8 +149,7 @@
             <tr><td>15:05–15:15</td><td>智能資安科技股份有限公司</td><td>專注 PUF 晶片，保障 IoT 與嵌入式資安。</td><td></td></tr>
             <tr><td>15:15–15:25</td><td>摯陞數位科技有限公司</td><td>智慧航運解決方案，提升船舶運營效能。</td><td></td></tr>
             <tr><td>15:25–15:35</td><td>杰悉科技股份有限公司</td><td>杰悉科技以Digital Twin為技術基底，將IoT數據視覺化，結合場域3D建模，開發3D可視化中央管理系統平台。</td><td></td></tr>
-            <tr><td>15:35–15:45</td><td>源灃節能科技有限公司</td><td>我們首創濾電優化節能技術，降低電路與設備的能耗，實現高效節能20%以上的效果，並透電力監控系統將數據上傳至雲端，進行節能效率分析。以科學化的數據，透過第三方公證單位，開立符合國際標準的節能減碳研究報告書，並透過零成本安裝節能分潤模式，協助企業輕鬆贏接ESG,共同守護地球的永續未來。
-</td><td></td></tr>
+            <tr><td>15:35–15:45</td><td>源灃節能科技有限公司</td><td>我們首創濾電優化節能技術，降低電路與設備的能耗，實現高效節能20%以上的效果，並透電力監控系統將數據上傳至雲端，進行節能效率分析。以科學化的數據，透過第三方公證單位，開立符合國際標準的節能減碳研究報告書，並透過零成本安裝節能分潤模式，協助企業輕鬆贏接ESG,共同守護地球的永續未來。</td><td></td></tr>
             <tr><td>15:55–16:05</td><td>那啥科技有限公司</td><td>以創意驅動新產品，展現靈活創新能量。</td><td></td></tr>
           </tbody>
         </table>
@@ -152,6 +157,7 @@
       </div>
     </section>
 
+    <!-- Day 2 -->
     <section id="day2" class="section">
       <div class="card">
         <h2>新創企業 Pitch 流程｜Day 2 (8/23 週六 10:00–11:30) <span class="pill day2">9家</span></h2>
@@ -175,12 +181,34 @@
         </div></div>
       </div>
     </section>
-  </div>
 
+    <!-- 聯絡資訊 -->
+    <section id="contact" class="section">
+      <div class="card">
+        <h2>聯絡資訊</h2>
+        <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>單位</th><th>聯絡人</th><th>Email</th><th>電話</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>資誠聯合會計師事務所</td><td>李姿燕（協理）</td><td><a href="mailto:kevin.pai@pwc.com">kevin.pai@pwc.com</a></td><td>07-2373116 分機 70311</td></tr>
+            <tr><td>證券櫃檯買賣中心</td><td>曹國榮（經理）</td><td><a href="mailto:lucky6059@tpex.org.tw">lucky6059@tpex.org.tw</a></td><td>0922-181012</td></tr>
+            <tr><td>AVA ANGELS</td><td>莊孟儒（經理）</td><td><a href="mailto:jeff@angeltoventure.com">jeff@angeltoventure.com</a></td><td>0910-631933</td></tr>
+            <tr><td>精誠資訊股份有限公司</td><td>黃遠鵬（經理）</td><td><a href="mailto:joe_huang@systex.com">joe_huang@systex.com</a></td><td>0919-779639</td></tr>
+            <tr><td>緯創資通股份有限公司</td><td>陳懷伶（投資經理）</td><td><a href="mailto:Angela_HL_Chen@wistron.com">Angela_HL_Chen@wistron.com</a></td><td>0912-683580</td></tr>
+            <tr><td>博智投資股份有限公司</td><td>王俞又（合夥人）</td><td><a href="mailto:jackeywang@gmail.com">jackeywang@gmail.com</a></td><td>沒手機梓豪有line</td></tr>
+          </tbody>
+        </table>
+        </div></div>
+      </div>
+    </section>
+  </div>
+ 
 <script>
 (function(){
   var nav = document.getElementById('nav');
-  var sections = ['morning','day1','day2'];
+  var sections = ['morning','day1','day2','contact'];
   function show(id){
     sections.forEach(function(s){
       var el = document.getElementById(s);
@@ -195,6 +223,7 @@
     var id = btn.getAttribute('data-target');
     show(id);
   });
+  // 支援以 #hash 直接開啟分頁
   function initFromHash(){
     var hash = (location.hash||'').replace('#','');
     if(sections.indexOf(hash) >= 0){ show(hash); }
